@@ -26,7 +26,7 @@ async function songsName() {
     let songElement = addSongInCard();
 
     songElement.forEach(element => {
-        element.addEventListener("click", () => {
+        element.addEventListener("click", (event) => {
             document.querySelector(".player-controls > .play-icon").classList.replace("fa-circle-play", "fa-circle-pause");
             playMusic(element.innerText);
             setMusicNameInPlayBar(currentSong);
@@ -140,9 +140,9 @@ function playMusic(songName) {
 
 songsName();
 
-document.querySelector("#volume").addEventListener("change" , (event) => {
-    currentSong.volume = parseFloat(event.target.value/100);
-    console.log(parseFloat(event.target.value/100));
+document.querySelector("#volume").addEventListener("change", (event) => {
+    currentSong.volume = parseFloat(event.target.value / 100);
+    console.log(parseFloat(event.target.value / 100));
 });
 
 let sidebar = document.querySelector("#bar");
