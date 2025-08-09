@@ -49,9 +49,6 @@
                 <i class="fa-solid fa-plus"></i>
             </header>
             <div class="aside-content">
-                <div class="podcast" id="songs">
-                    <p class="first">Your Songs</p>
-                </div>
                 <div class="playlist">
                     <p class="first">Create your first playlist</p>
                     <p class="second">It's easy, we'll help you</p>
@@ -83,26 +80,31 @@
                 <h2 class="h">Trending songs</h2>
                 <p class="des h">Show all</p>
             </section>
-            <div class="cards">
+            <div class="cards" id="first">
 
-                <div class="card" id="first">
+                <div class="previous-song-button next-previous">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+
+                <div class="card" data-music-name="Saiyaara Title Song">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card.jpeg" alt="Saiyaara song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Saiyaara&nbsp;&lpar;&quot;From Saiyaara&quot;&rpar;</h4>
-                        <p class="ellipsis"><a href="#" class="des h">Tanishk Bagchi</a>, <a href="#" class="des h">Faheem
+                        <h4 class="h ellipsis">Saiyaara &lpar;&quot;From Saiyaara&quot;&rpar;</h4>
+                        <p class="ellipsis"><a href="#" class="des h">Tanishk Bagchi</a>, <a href="#"
+                                class="des h">Faheem
                                 Abdullah</a>, <a href="#" class="des h">Arsalan Nizami</a>, <a href="#"
                                 class="des h">Irshad Kamil</a></p>
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Humsafar Song">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card1.jpeg" alt="Humsafar song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Humsafar&nbsp;&lpar;&quot;From Saiyaara&quot;&rpar;</h4>
+                        <h4 class="h ellipsis">Humsafar &lpar;&quot;From Saiyaara&quot;&rpar;</h4>
                         <p class="ellipsis"><a href="#" class="des h">Sachet&dash;Parampara</a>, <a href="#"
                                 class="des h">Sachet
                                 Tandon</a>, <a href="#" class="des h">Parampara Tandon</a>, <a href="#"
@@ -110,72 +112,79 @@
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Ehsaas">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card8.jpeg" alt="Ehsaas song">
                     </div>
                     <div class="card-title">
                         <h4 class="h ellipsis">Ehsaas</h4>
-                        <p class="ellipsis"><a href="#" class="des h">Faheem Abdullah</a>, <a href="#" class="des h">Duha
+                        <p class="ellipsis"><a href="#" class="des h">Faheem Abdullah</a>, <a href="#"
+                                class="des h">Duha
                                 Shah</a>, <a href="#" class="des h">Vaibhav Pani</a>, <a href="#" class="des h">Hyder
                                 Dar</a></p>
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Barbaad Song">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card2.jpeg" alt="Barbaad song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Barbaad&nbsp;&lpar;&quot;From Saiyaara&quot;&rpar;</h4>
+                        <h4 class="h ellipsis">Barbaad &lpar;&quot;From Saiyaara&quot;&rpar;</h4>
                         <p class="ellipsis"><a href="#" class="des h">The&nbsp;Rish</a>, <a href="#" class="des h">Jubin
                                 Nautiyal</a></p>
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Lyrical Song  Saiyaara Reprise - Female">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card3.jpeg" alt="Saiyaara Female song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Saiyaara&nbsp;Reprise &dash; Female</h4>
+                        <h4 class="h ellipsis">Saiyaara Reprise &dash; Female</h4>
                         <p class="ellipsis"><a href="#" class="des h">Tanishk Bagchi</a></p>
                     </div>
                 </div>
 
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Lyrical  Tum Ho Toh Song  Saiyaara">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card5.jpeg" alt="Tum Ho Toh song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Tum Ho Toh&nbsp;&lpar;&quot;From Saiyaara&quot;&rpar;</h4>
-                        <p class="ellipsis"><a href="#" class="des h">Vishal Mishra</a>, <a href="#" class="h des">Hansika
+                        <h4 class="h ellipsis">Tum Ho Toh &lpar;&quot;From Saiyaara&quot;&rpar;</h4>
+                        <p class="ellipsis"><a href="#" class="des h">Vishal Mishra</a>, <a href="#"
+                                class="h des">Hansika
                                 Pareek</a>, <a href="#" class="h des">Raj Shekhar</a></p>
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Dhun Song">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card4.jpeg" alt="Dhun song">
                     </div>
                     <div class="card-title">
-                        <h4 class="h ellipsis">Dhun&nbsp;&lpar;&quot;From Saiyaara&quot;&rpar;</h4>
+                        <h4 class="h ellipsis">Dhun &lpar;&quot;From Saiyaara&quot;&rpar;</h4>
                         <p class="ellipsis"><a href="#" class="des h">Mithoon</a>, <a href="#" class="h des">Arijit
                                 Singh</a></p>
                     </div>
                 </div>
 
-                <div class="card" id="first">
+                <div class="card" data-music-name="Bas Ek Dhadak">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/card7.jpeg" alt="Bas Ek Dhadak song">
                     </div>
                     <div class="card-title">
                         <h4 class="h ellipsis">Bas Ek Dhadak &dash; From &quot;Dhadak 2&quot;</h4>
-                        <p class="ellipsis"><a href="#" class="des h">Shreya Ghoshal</a>, <a href="#" class="h des">Jubin
+                        <p class="ellipsis"><a href="#" class="des h">Shreya Ghoshal</a>, <a href="#"
+                                class="h des">Jubin
                                 Nautiyal</a>, <a href="#" class="h des">Javed&hyphen;Mohsin</a>, <a href="#"
                                 class="h des">Rashmi Virag</a></p>
                     </div>
+                </div>
+
+                <div class="next-song-button next-previous">
+                    <i class="fa-solid fa-angle-right"></i>
                 </div>
 
             </div>
@@ -186,6 +195,10 @@
             </section>
 
             <div class="cards">
+
+                <div class="previous-song-button next-previous">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
 
                 <div class="card">
                     <div class="art-image">
@@ -236,7 +249,7 @@
                         <p class="des">Artist</p>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="art-image">
                         <img src="/ASSETS/PICTURES/artist6.jpeg" alt="Sachet-Parampara">
@@ -246,7 +259,7 @@
                         <p class="des">Artist</p>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="art-image">
                         <img src="/ASSETS/PICTURES/artist7.jpeg" alt="Jasleen Royal">
@@ -256,7 +269,7 @@
                         <p class="des">Artist</p>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="art-image">
                         <img src="/ASSETS/PICTURES/artist8.jpeg" alt="Shubh">
@@ -267,6 +280,10 @@
                     </div>
                 </div>
 
+                <div class="next-song-button next-previous">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+
             </div>
 
             <section class="content-header">
@@ -275,6 +292,10 @@
             </section>
 
             <div class="cards">
+
+                <div class="previous-song-button next-previous">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
 
                 <div class="card">
                     <div class="card-image">
@@ -329,14 +350,15 @@
                                 class="des h">Mithoon</a>, <a href="#" class="des h">Ami Mishra</a></p>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <div class="card-image">
                         <img src="/ASSETS/PICTURES/album6.jpeg" alt="Raanjhan Album">
                     </div>
                     <div class="card-title">
                         <p class="h ellipsis">Raanjhan&nbsp;&lpar;From &quot;Do Patti&quot;&rpar;</p>
-                        <p class="ellipsis"><a href="#" class="des h">Sachet&dash;Parampara</a>, <a href="#" class="des h">Parampara Tandon</a>, <a href="#" class="des h">Kausar Munir</a></p>
+                        <p class="ellipsis"><a href="#" class="des h">Sachet&dash;Parampara</a>, <a href="#"
+                                class="des h">Parampara Tandon</a>, <a href="#" class="des h">Kausar Munir</a></p>
                     </div>
                 </div>
 
@@ -361,6 +383,10 @@
                     </div>
                 </div>
 
+                <div class="next-song-button next-previous">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
+
             </div>
 
             <section class="content-header">
@@ -369,6 +395,10 @@
             </section>
 
             <div class="cards">
+
+                <div class="previous-song-button next-previous">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
 
                 <div class="card">
                     <div class="card-image">
@@ -414,6 +444,19 @@
                         <p class="des ellipsis">Your daily update of the most viral tracks right now - Global.</p>
                     </div>
                 </div>
+                
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/ASSETS/PICTURES/fc6.jpg" alt="Viral 50 India">
+                    </div>
+                    <div class="card-title">
+                        <p class="des ellipsis">Your daily update of the most viral tracks right now - India.</p>
+                    </div>
+                </div>
+
+                <div class="next-song-button next-previous">
+                    <i class="fa-solid fa-angle-right"></i>
+                </div>
 
             </div>
 
@@ -423,6 +466,10 @@
             </section>
 
             <div class="cards">
+
+                <div class="previous-song-button next-previous">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
 
                 <div class="card">
                     <div class="card-image">
@@ -467,6 +514,37 @@
                     <div class="card-title">
                         <p class="des ellipsis">With Hemant Kumar, Asha Bhosle, Geeta Dutt and more</p>
                     </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/ASSETS/PICTURES/radio6.jpeg" alt="Sidhu Moose Wala Radio">
+                    </div>
+                    <div class="card-title">
+                        <p class="des ellipsis">With AP Dhillon, JERRY, Amrinder Gill and more</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/ASSETS/PICTURES/radio7.jpeg" alt="Diljit Doshanjh Radio">
+                    </div>
+                    <div class="card-title">
+                        <p class="des ellipsis">With Karan Aujla, Sidhu Moose Wala, AP Dhillon and more</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/ASSETS/PICTURES/radio8.jpeg" alt="Yo Yo Honey Singh Radio">
+                    </div>
+                    <div class="card-title">
+                        <p class="des ellipsis">With Badshah, Harrdy Sandhu, Sachin-Jigar and more</p>
+                    </div>
+                </div>
+
+                <div class="next-song-button next-previous">
+                    <i class="fa-solid fa-angle-right"></i>
                 </div>
 
             </div>
@@ -525,10 +603,10 @@
 
     <div class="music-player">
         <div class="albums">
-            <img id="playing-card" src="/ASSETS/PICTURES/card2.jpeg">
-            <div class="music-info">
-                <p class="card-title cursor ellipsis" id="music-title">Barbaad (From Saiyaara)</p>
-                <p class="card-info cursor ellipsis"></p>
+            <img id="playing-card" src="/ASSETS/PICTURES/card.jpeg">
+            <div id="music-info">
+                <p class="card-title cursor one-ellipsis" id="music-title">Saiyaara (From Saiyaara)</p>
+                <p class="card-info cursor ellipsis" id="music-creator"></p>
             </div>
             <i class="fa-regular fa-heart cursor"></i>
             <i class="fa-solid fa-expand cursor"></i>

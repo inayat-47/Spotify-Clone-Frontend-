@@ -1,7 +1,7 @@
 console.log("Starting some Java Script");
 
 let currentSong = new Audio();
-let songs = [];
+let songs = [], musicSeq = [];
 
 async function getSongs() {
     let data = await fetch("http://127.0.0.1:5500/ASSETS/SONGS/");
@@ -13,7 +13,7 @@ async function getSongs() {
 
     for (let name of names) {
         if (name.href.endsWith('.mp3'))
-            songs.push(name);
+            songs.push(decodeURIComponent(name.href.split('/SONGS/')[1]));
     }
     return songs;
 }
@@ -21,20 +21,44 @@ async function getSongs() {
 async function songsName() {
     songs = await getSongs();
 
-    playMusic((songs[0].title.slice(0, songs[0].title.length - 4)));
+    let arrMusicSeq = document.querySelectorAll("#first .card");
+    findMusic(arrMusicSeq[0].dataset.musicName);
+
+    for (let songSeq of arrMusicSeq) {
+        let music = songs.filter(song => song.indexOf(songSeq.dataset.musicName) !== -1);
+        musicSeq.push(music[0]);
+    }
+
     progressLoad();
-    let songElement = addSongInCard();
+    let songElement = document.querySelectorAll("#first > .card");
 
     songElement.forEach(element => {
         element.addEventListener("click", (event) => {
+
             document.querySelector(".player-controls > .play-icon").classList.replace("fa-circle-play", "fa-circle-pause");
-            playMusic(element.innerText);
-            setMusicNameInPlayBar(currentSong);
-            setMusicCardInPlayBar(element.innerText);
+            let srcOfImage = element.childNodes[1].childNodes[1].src.split("/");
+            setMusicCardInPlayBar(srcOfImage.at(-1));
+            let musicDetail = element.innerText.split("\n\n");
+            
+            setMusicNameInPlayBar(musicDetail[0] , musicDetail[1]);
+
+            let musicName = element.dataset.musicName;
+            findMusic(musicName);
+
             progressLoad();
         });
     });
+}
 
+songsName();
+
+let findMusic = (musicName) => {
+    for (let song of songs) {
+        if (song.indexOf(musicName) != -1) {
+            playMusic(song);
+            break;
+        }
+    }
 }
 
 let progressLoad = () => {
@@ -57,6 +81,26 @@ let progressLoad = () => {
     });
 }
 
+document.querySelectorAll(".next-song-button").forEach(element => {
+    element.addEventListener("click", (event) => {
+        let cardContainer = element.parentElement;
+        cardContainer.scroll({
+            left: cardContainer.scrollLeft + 200,
+            behavior: "smooth"
+        });
+    });
+});
+
+document.querySelectorAll(".previous-song-button").forEach(element => {
+    element.addEventListener("click", (event) => {
+        let cardContainer = element.parentElement;
+        cardContainer.scroll({
+            left: cardContainer.scrollLeft - 200,
+            behavior: "smooth"
+        });
+    });
+});
+
 document.querySelector("#music-progress").addEventListener("input", (event) => {
     currentSong.currentTime = event.target.value;
 });
@@ -75,52 +119,40 @@ play.addEventListener("click", () => {
 });
 
 document.querySelector("#next-song").addEventListener("click", (event) => {
-    let i;
-    for (i = 0; i < songs.length; i++) {
-        if (songs[i].href == currentSong.src)
-            break;
-    }
-    let nameOfSong = songs[(i + 1) % songs.length].title.replace(".mp3", "");
+    let index = musicNextPrevious();
+    let nameOfSong = musicSeq[(index + 1) % musicSeq.length];
     playMusic(nameOfSong);
-    setMusicCardInPlayBar(nameOfSong);
-    setMusicNameInPlayBar(currentSong);
 });
 
 
 document.querySelector("#previous-song").addEventListener("click", (event) => {
-    let i;
-    for (i = 0; i < songs.length; i++) {
-        if (songs[i].href == currentSong.src)
-            break;
-    }
-    let nameOfSong = songs[(i - 1 + songs.length) % songs.length].title.replace(".mp3", "");
+    let index = musicNextPrevious();
+    let nameOfSong = musicSeq[(index - 1 + musicSeq.length) % musicSeq.length];
     playMusic(nameOfSong);
-    setMusicCardInPlayBar(nameOfSong);
-    setMusicNameInPlayBar(currentSong);
 });
 
-function setMusicNameInPlayBar(song) {
-    let nameOfSong = song.src.split("/SONGS/")[1].replaceAll("%20", " ").replaceAll("%E2%80%90", "-");
-    nameOfSong = nameOfSong.slice(0, nameOfSong.length - 4);
-    document.querySelector("#music-title").innerText = nameOfSong;
-    return nameOfSong;
-}
-
-function setMusicCardInPlayBar(songName) {
-    let songPicture = ["Barbaad (From Saiyaara)/card2.jpeg", "Dhun (From Saiyaara)/card4.jpeg", "Humsafar (From Saiyaara)/card1.jpeg", "Saiyaara (From Saiyaara)/card.jpeg", "Saiyaara Reprise ‐ Female/card3.jpeg", "Tum Ho Toh (From Saiyaara)/card5.jpeg"];
-    let index = songPicture.findIndex(item => item.startsWith(songName));
-    document.querySelector("#playing-card").setAttribute("src", `/ASSETS/PICTURES/${songPicture[index].split('/')[1]}`);
-}
-
-function addSongInCard() {
-    for (let song of songs) {
-        let songName = document.createElement('p');
-        songName.innerText = `${song.title.slice(0, song.title.length - 4)}`;
-        songName.setAttribute("class", "second song cursor");
-        document.querySelector("#songs").append(songName);
-        songName.style.marginBottom = "0.75rem";
+let musicNextPrevious = () => {
+    for (let element of document.querySelectorAll("#first .card")) {
+        if (currentSong.innerText.indexOf(element.dataset.musicName) != -1) {
+            setMusicCardInPlayBar(element.querySelector("img").src.split("/").at(-1));
+            setMusicNameInPlayBar(element.querySelector("h4").innerText , element.querySelector("p").innerText);
+        }
     }
-    return document.querySelectorAll(".song");
+    for (let index = 0; index < musicSeq.length; index++) {
+        if (currentSong.innerText == musicSeq[index])
+            return index;
+    }
+}
+
+function setMusicNameInPlayBar(songName,songCreator) {
+    let creatorElement = document.querySelector("#music-creator");
+    let musicElement = document.querySelector("#music-info > #music-title");
+    musicElement.innerText = songName;
+    creatorElement.innerText = songCreator;
+}
+
+function setMusicCardInPlayBar(src) {
+    document.querySelector("#playing-card").setAttribute("src", `/ASSETS/PICTURES/${src}`);
 }
 
 function timeDuration(element, time) {
@@ -130,7 +162,7 @@ function timeDuration(element, time) {
 }
 
 function playMusic(songName) {
-    currentSong.src = `/ASSETS/SONGS/${songName}.mp3`;
+    currentSong.src = `/ASSETS/SONGS/${songName}`;
     currentSong.play();
     if (!currentSong.paused) {
         document.querySelector(".player-controls > .play-icon").classList.replace("fa-circle-play", "fa-circle-pause");
@@ -138,11 +170,9 @@ function playMusic(songName) {
     currentSong.innerText = songName;
 }
 
-songsName();
 
 document.querySelector("#volume").addEventListener("change", (event) => {
     currentSong.volume = parseFloat(event.target.value / 100);
-    console.log(parseFloat(event.target.value / 100));
 });
 
 let sidebar = document.querySelector("#bar");
