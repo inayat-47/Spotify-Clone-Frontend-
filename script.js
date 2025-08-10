@@ -39,8 +39,8 @@ async function songsName() {
             let srcOfImage = element.childNodes[1].childNodes[1].src.split("/");
             setMusicCardInPlayBar(srcOfImage.at(-1));
             let musicDetail = element.innerText.split("\n\n");
-            
-            setMusicNameInPlayBar(musicDetail[0] , musicDetail[1]);
+
+            setMusicNameInPlayBar(musicDetail[0], musicDetail[1]);
 
             let musicName = element.dataset.musicName;
             findMusic(musicName);
@@ -81,9 +81,9 @@ let progressLoad = () => {
     });
 }
 
-document.querySelectorAll(".next-song-button").forEach(element => {
+document.querySelectorAll(".card-container .next-song-button").forEach(element => {
     element.addEventListener("click", (event) => {
-        let cardContainer = element.parentElement;
+        let cardContainer = element.previousElementSibling;
         cardContainer.scroll({
             left: cardContainer.scrollLeft + 200,
             behavior: "smooth"
@@ -91,9 +91,9 @@ document.querySelectorAll(".next-song-button").forEach(element => {
     });
 });
 
-document.querySelectorAll(".previous-song-button").forEach(element => {
+document.querySelectorAll(".card-container .previous-song-button").forEach(element => {
     element.addEventListener("click", (event) => {
-        let cardContainer = element.parentElement;
+        let cardContainer = element.nextElementSibling;
         cardContainer.scroll({
             left: cardContainer.scrollLeft - 200,
             behavior: "smooth"
@@ -119,23 +119,38 @@ play.addEventListener("click", () => {
 });
 
 document.querySelector("#next-song").addEventListener("click", (event) => {
-    let index = musicNextPrevious();
+    let index = musicNextPrevious(event.target.id);
     let nameOfSong = musicSeq[(index + 1) % musicSeq.length];
     playMusic(nameOfSong);
 });
 
 
 document.querySelector("#previous-song").addEventListener("click", (event) => {
-    let index = musicNextPrevious();
+    let index = musicNextPrevious(event.target.id);
     let nameOfSong = musicSeq[(index - 1 + musicSeq.length) % musicSeq.length];
     playMusic(nameOfSong);
 });
 
-let musicNextPrevious = () => {
+let musicNextPrevious = (btn) => {
     for (let element of document.querySelectorAll("#first .card")) {
-        if (currentSong.innerText.indexOf(element.dataset.musicName) != -1) {
-            setMusicCardInPlayBar(element.querySelector("img").src.split("/").at(-1));
-            setMusicNameInPlayBar(element.querySelector("h4").innerText , element.querySelector("p").innerText);
+        if ((currentSong.innerText.indexOf(element.dataset.musicName) != -1 && btn == "next-song")) {
+            if (element.nextElementSibling == null) {
+                setMusicCardInPlayBar(document.querySelector(".cards").firstElementChild.querySelector("img").src.split("/").at(-1));
+                setMusicNameInPlayBar(document.querySelector(".cards").firstElementChild.querySelector("h4").innerText, document.querySelector(".cards").firstElementChild.querySelector("p").innerText);
+            } else {
+                console.log(element.nextElementSibling);
+                setMusicCardInPlayBar(element.nextElementSibling.querySelector("img").src.split("/").at(-1));
+                setMusicNameInPlayBar(element.nextElementSibling.querySelector("h4").innerText, element.nextElementSibling.querySelector("p").innerText);
+            }
+        }
+        else if (currentSong.innerText.indexOf(element.dataset.musicName) != -1 && btn == "previous-song") {
+            if (element.previousElementSibling == null) {
+                setMusicCardInPlayBar(document.querySelector(".cards").lastElementChild.querySelector("img").src.split("/").at(-1));
+                setMusicNameInPlayBar(document.querySelector(".cards").lastElementChild.querySelector("h4").innerText, document.querySelector(".cards").lastElementChild.querySelector("p").innerText);
+            } else {
+                setMusicCardInPlayBar(element.previousElementSibling.querySelector("img").src.split("/").at(-1));
+                setMusicNameInPlayBar(element.previousElementSibling.querySelector("h4").innerText, element.previousElementSibling.querySelector("p").innerText);
+            }
         }
     }
     for (let index = 0; index < musicSeq.length; index++) {
@@ -144,7 +159,7 @@ let musicNextPrevious = () => {
     }
 }
 
-function setMusicNameInPlayBar(songName,songCreator) {
+function setMusicNameInPlayBar(songName, songCreator) {
     let creatorElement = document.querySelector("#music-creator");
     let musicElement = document.querySelector("#music-info > #music-title");
     musicElement.innerText = songName;

@@ -307,14 +307,8 @@ main>section {
 .cards {
     display: flex;
     align-items: center;
-    position: relative;
     overflow-x: auto;
 
-    &:hover {
-        .next-previous {
-            opacity: 1;
-        }
-    }
 }
 
 .cards::-webkit-scrollbar {
@@ -324,11 +318,22 @@ main>section {
 .card-title a {
     text-decoration: none;
 }
+.card-container{
+    width: 100%;
+    position: relative;
+    display: flex;
+    &:hover {
+        .next-previous {
+            opacity: 1;
+        }
+    }
+}
 
 .next-previous {
     background-color: #1f1f1fda;
     opacity: 0;
     padding: 0 0.5rem;
+    margin: -1.25rem;
     position: sticky;
     display: inline-flex;
     align-items: center;
@@ -336,7 +341,8 @@ main>section {
     height: 2.75rem;
     width: 2.75rem;
     border-radius: 2rem;
-
+    z-index: 1;
+    align-self: center;
     &:hover {
         cursor: pointer;
         background-color: #121212;
@@ -345,12 +351,10 @@ main>section {
 
 .previous-song-button {
     left: 0px;
-    margin: -1.25rem;
 }
 
 .next-song-button {
     right: 0px;
-    margin: -2.75rem;
 }
 
 .next-previous>i {
