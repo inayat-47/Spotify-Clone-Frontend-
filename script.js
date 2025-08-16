@@ -67,8 +67,10 @@ let progressLoad = () => {
         document.querySelector("#music-progress").value = currentSong.currentTime;
         timeDuration(document.querySelector("#dt"), currentSong.currentTime);
 
-        if (currentSong.ended) {
+        if (currentSong.ended || currentSong.paused) {
             document.querySelector(".player-controls > .play-icon").classList.replace("fa-circle-pause", "fa-circle-play");
+        } else if(currentSong.played){
+            document.querySelector(".player-controls > .play-icon").classList.replace("fa-circle-play", "fa-circle-pause");
         }
 
     };
